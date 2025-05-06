@@ -4,8 +4,10 @@ import dotenv from "dotenv";
 import morgan from "morgan";
 import cors from "cors";
 import serverError from "./middleware/serverError.mjs";
+import connectDB from "./db/conn.mjs";
 
 //setups
+connectDB();
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3001;
