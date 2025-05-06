@@ -1,0 +1,20 @@
+{
+  "name": "gameshopbackend",
+  "version": "1.0.0",
+  "description": "- Users\r     - name\r     - pwd\r     - email\r     - admin (Boolean)\r - Games\r     - name\r     - catagory\r     - price\r     - description\r     - numOfPlayers\r     - quantity\r - Cart\r     - useID\r     - items (List of Games)\r     - total (Price - Virtual?)",
+  "main": "server.mjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "mongoose": "^8.14.1",
+    "morgan": "^1.10.0"
+  }
+}
