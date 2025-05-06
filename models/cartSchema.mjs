@@ -1,4 +1,4 @@
-import mongoose, { mongo } from "mongoose";
+import mongoose from "mongoose";
 
 const cartItemSchema = new mongoose.Schema({
   game: { type: mongoose.Schema.Types.ObjectId, ref: "Game", required: true },
