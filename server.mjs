@@ -6,6 +6,7 @@ import cors from "cors";
 import serverError from "./middleware/serverError.mjs";
 import connectDB from "./db/conn.mjs";
 import userRoutes from './routes/userRoutes.mjs'
+import gameRoutes from './routes/gameRoutes.mjs'
 
 //setups
 connectDB();
@@ -20,6 +21,8 @@ app.use(express.json());
 
 //routes
 app.use('/api/user', userRoutes)
+app.use('/api/game', gameRoutes)
+
 
 //error handling middleware
 app.use(serverError);

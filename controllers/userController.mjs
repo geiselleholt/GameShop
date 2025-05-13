@@ -1,4 +1,4 @@
-import User from "../userSchema.mjs";
+import User from "../models/userSchema.mjs";
 import Cart from "../models/cartSchema.mjs";
 
 // @route: POST  api/user/register
