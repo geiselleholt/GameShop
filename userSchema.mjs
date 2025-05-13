@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import cartSchema from "./cartSchema.mjs";
+import cartSchema from "./models/cartSchema.mjs";
 
 const userSchema = new mongoose.Schema({
   userName: { type: String, required: true, unique: true },
@@ -12,7 +12,7 @@ const userSchema = new mongoose.Schema({
       "Email address must be valid !",
     ],
   },
-  password: { type: String, required: true, minLength: 6, },
+  password: { type: String, required: true, minLength: 6 },
   admin: { type: Boolean, default: false },
   cart: { type: mongoose.Schema.Types.ObjectId, ref: "Cart" },
 });

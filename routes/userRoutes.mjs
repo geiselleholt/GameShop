@@ -1,44 +1,33 @@
 //imports
 import express from "express";
-import User from "../models/userSchema.mjs";
-import Cart from "../models/cartSchema.mjs";
+import userController from "../controllers/userController.mjs";
+import auth from "../middleware/auth.mjs";
+import User from "../controllers/userController.mjs";
 
 const router = express.Router();
 
+////////////
 // test route
 // router.get("/", (req, res) => {
 //   res.send("Testing Routes");
 // });
+////////////
 
-// @route: POST
-// @desc: CREATE register a user
-// @access: public
-router.post("/register", async (req, res) => {
-  const { userName, email, password } = req.body; // destructure request body
+// @route: POST /api/user/register
+// @desc:  CREATE a register user route
+// @access: Public
+router.post("/register", userController.register);
 
-  if (!userName || !email || !password) {
-    return res.status(400).json({
-      msg: "All fields are required",
-    });
-  }
+// @route: POST /api/user/login
+// @desc:  CREATE a login user route
+// @access: Public
+router.post("/login", userController.login);
 
-  let user = await User.findOne({ email });
-  if (user) {
-    return res.status(400).json({ msg: "Email already exists" });
-  }
 
-  user = new User({ userName, email, password });
-
-  await user.save();
-
-  const cart = new Cart({ user: user._id, items: [] });
-
-  await cart.save();
-
-  user.cart = cart._id;
-  await user.save();
-
-  res.status(201).json({ userId: user._id, cartId: cart._id });
-});
+// @route: GET /api/user/login
+// @desc:  READ user data
+// @access: Private
+// with auth middleware
+router.get("/", auth, userController.getData);
 
 export default router;
