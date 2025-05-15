@@ -1,8 +1,6 @@
-//imports
 import express from "express";
 import userController from "../controllers/userController.mjs";
 import auth from "../middleware/auth.mjs";
-import adminAuth from "../middleware/adminAuth.mjs"
 
 const router = express.Router();
 
@@ -24,13 +22,10 @@ router.post("/register", userController.register);
 router.post("/login", userController.login);
 
 // @route: GET /api/user/login
-// @desc:  READ user data
+// @desc:  READ all user data
 // @access: Private
 // with auth middleware
 router.get("/", auth, userController.getData);
-
-
-
 
 
 export default router;

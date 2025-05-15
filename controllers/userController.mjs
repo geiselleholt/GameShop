@@ -35,7 +35,6 @@ let register = async (req, res) => {
 // @route: POST  api/user/login
 // @desc: CREATE login for a user
 // @access: public
-
 let login = async (req, res) => {
   const { userName, email, password } = req.body; // destructure request body
 
@@ -57,6 +56,10 @@ let login = async (req, res) => {
   res.status(200).json({ userId: user._id, cartId: user.cart });
 };
 
+// @route: GET /api/user/login
+// @desc:  READ all user data
+// @access: Private
+// with auth middleware
 let getData = async (req, res) => {
   let user = await User.findById(req.user).select("-password");
   res.status(200).json(user);

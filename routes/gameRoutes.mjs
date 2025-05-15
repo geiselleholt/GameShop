@@ -1,6 +1,7 @@
 import express from "express";
 import auth from "../middleware/auth.mjs";
 import adminAuth from "../middleware/adminAuth.mjs";
+import gameController from "../controllers/gameController.mjs";
 
 const router = express.Router();
 
@@ -15,41 +16,28 @@ const router = express.Router();
 // @desc:  CREATE admin data
 // @access: Private
 // with auth and adminAuth middleware
-router.post("/", auth, adminAuth, async (req, res) => {
-  const newGame = await Game.insertOne(req.body);
-
-  res.json(newGame);
-});
+router.post("/", auth, adminAuth, gameController.createGame);
 
 // @route: GET /api/game
 // @desc:  READ all games
 // @access: Public
-router.get("/", async (req, res) => {
-  const allGames = await Game.find({});
+router.get("/", gameController.getAllGames);
 
-  res.json(allGames);
-});
+// @route: GET /api/game
+// @desc:  READ one game
+// @access: Public
+router.get("/:id", gameController.getOneGame);
 
 // @route: PUT /api/game
 // @desc:  UPDATE one game
 // @access: Private
 // with auth and adminAuth middleware
-router.put("/:id", auth, adminAuth, async (req, res) => {
-  let updatedGame = await Game.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
-  });
-
-  res.json(updatedGame);
-});
+router.put("/:id", auth, adminAuth, gameController.updateOneGame);
 
 // @route: DELETE /api/game
 // @desc:  DELETE one game
 // @access: Private
 // with auth and adminAuth middleware
-router.delete("/:id", auth, adminAuth, async (req, res) => {
-  let deleteGame = await Game.findByIdAndDelete(req.params.id);
-
-  res.json(deleteGame);
-});
+router.delete("/:id", auth, adminAuth, gameController.deleteOneGame);
 
 export default router;
