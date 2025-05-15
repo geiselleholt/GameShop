@@ -7,16 +7,12 @@ export default function (req, res, next) {
     });
   }
 
-  try {
-    if (token.length != 24) {
-      throw Error("Invaild Token");
-    }
-
-    req.user = token;
-
-    next();
-  } catch (error) {
-    console.log(error.message);
-    res.status(401).json({ msg: "Invalid Token" });
+  if (token.length != 24) {
+    res.status(401).json({
+      msg: "Invalid Token, Auth Denied",
+    });
   }
-}
+
+  req.user = token;
+  next();
+};
