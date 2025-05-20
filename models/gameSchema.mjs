@@ -5,11 +5,12 @@ const gameSchema = new mongoose.Schema({
   category: {
     type: String,
     required: true,
-    enum: ["Board", "Cards", "Dice", "Outdoor", "Video", "Other"],
+    enum: ["Board", "Card", "Dice", "Outdoor", "Video", "Other"],
   },
   price: { type: Number, required: true },
   desc: { type: String },
   qty: { type: Number, required: true },
+  img: { type: String, required: true },
 });
 
 export default mongoose.model("Game", gameSchema);
